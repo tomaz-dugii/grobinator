@@ -11,7 +11,8 @@ class GravePage extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.grey, size: 20.0),
         backgroundColor: Colors.white,
-        title:Text("Iskanje groba", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600)),
+        title:
+        Text("Iskanje groba", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600)),
         centerTitle: true,
         elevation: 0,
       ),

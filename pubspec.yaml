@@ -26,6 +26,7 @@ dependencies:
 
 
   qr_code_scanner: ^0.4.0
+  step_progress_indicator: ^1.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -58,6 +59,9 @@ flutter:
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
 
+  assets:
+   - assets/
+   - assets/images/
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

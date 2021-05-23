@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:grobinator/pages/candle_list_page.dart';
+import 'package:grobinator/pages/grave_page.dart';
 import 'package:grobinator/pages/light_candle.dart';
 
 import 'home_page.dart';
@@ -33,26 +35,39 @@ class _MainScreenState extends State<MainScreen> {
                   didSelectedPage: (page) => setState(() => _selectedPage = page),
                 ),
                 key: ValueKey('qrScan')),
-          if (_selectedPage != null && _selectedPage['page'] == 'LightCandle')
+          if (_selectedPage != null && _selectedPage['page'] == 'CandleList')
             MaterialPage(
-              child: LightCandle(
+              child: CandleListPage(
                 didSelectedPage: (page) => setState(() => _selectedPage = page),
               ),
-              key: ValueKey('LightCandle'),
+              key: ValueKey('CandleList'),
             ),
           if (_selectedPage != null && _selectedPage['page'] == 'GravePage')
             MaterialPage(
-              child: LightCandle(
+              child: GravePage(
                 didSelectedPage: (page) => setState(() => _selectedPage = page),
               ),
               key: ValueKey('GravePage'),
+            ),
+            if (_selectedPage != null && _selectedPage['page'] == 'LightCandle')
+            MaterialPage(
+              child: LightCandle(
+                candleId: _selectedPage['candleID'],
+                didSelectedPage: (page) => setState(() => _selectedPage = page),
+              ),
+              key: ValueKey('LightCandle'),
             ),
         ],
         onPopPage: (route, result) {
           final page = route.settings as MaterialPage;
           if (page.key == QrCodeScann.valueKey) _selectedPage = null;
-          if (page.key == QrCodeScann.valueKey) _selectedPage = null;
-          if (page.key == LightCandle.valueKey) {
+          if (page.key == GravePage.valueKey) _selectedPage = null;
+          if (page.key == LightCandle.valueKey){
+            setState(() {
+              _selectedPage['page'] = 'CandleList';
+            });
+          } 
+          if (page.key == CandleListPage.valueKey) {
             _selectedPage['page'] = null;
           }
           return route.didPop(result);

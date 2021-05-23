@@ -28,6 +28,15 @@ class _QrCodeScannState extends State<QrCodeScann> {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(milliseconds: 1400), () {
+      setState(() {
+        widget.didSelectedPage({
+          'page': 'LightCandle',
+          'candleID': "12345",
+        });
+      });
+    });
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -35,8 +44,7 @@ class _QrCodeScannState extends State<QrCodeScann> {
         centerTitle: true,
         elevation: 0,
       ),
-      body:
-          Column(
+      body: Column(
         children: <Widget>[
           Expanded(flex: 4, child: _buildQrView(context)),
         ],
@@ -46,14 +54,22 @@ class _QrCodeScannState extends State<QrCodeScann> {
 
   Widget _buildQrView(BuildContext context) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
-    var scanArea = (MediaQuery.of(context).size.width < 400 || MediaQuery.of(context).size.height < 400) ? 250.0 : 350.0;
+    var scanArea = (MediaQuery.of(context).size.width < 400 ||
+            MediaQuery.of(context).size.height < 400)
+        ? 250.0
+        : 350.0;
     // To ensure the Scanner view is properly sizes after rotation
     // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
       key: qrKey,
       onQRViewCreated: _onQRViewCreated,
       overlay: QrScannerOverlayShape(
-          overlayColor: Color.fromRGBO(0, 0, 0, 1), borderColor: Colors.white, borderRadius: 5, borderLength: 20, borderWidth: 10, cutOutSize: scanArea),
+          overlayColor: Color.fromRGBO(0, 0, 0, 1),
+          borderColor: Colors.white,
+          borderRadius: 5,
+          borderLength: 20,
+          borderWidth: 10,
+          cutOutSize: scanArea),
     );
   }
 
@@ -65,7 +81,7 @@ class _QrCodeScannState extends State<QrCodeScann> {
       setState(() {
         result = scanData;
         widget.didSelectedPage({
-          'page': 'AddCandle',
+          'page': 'LightCandle',
           'candleID': result.code,
         });
       });
